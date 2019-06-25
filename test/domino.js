@@ -1398,3 +1398,9 @@ exports.incrementalHTMLParser2 = function() {
     '<html><head></head><body><p>hello<b>foo&amp;</b></p></body></html>'
   );
 };
+
+exports.formElements = function(){
+  var document = domino.createDocument('<body><form><input/><button/><fieldset/><object/><output/><select/><textarea/></form></body>');
+  var form = document.querySelector('form');
+  form.elements.length.should.equal(7);
+};
