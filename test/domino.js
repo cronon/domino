@@ -1400,7 +1400,24 @@ exports.incrementalHTMLParser2 = function() {
 };
 
 exports.formElements = function(){
-  var document = domino.createDocument('<body><form><input/><button/><fieldset/><object/><output/><select/><textarea/></form></body>');
+  var document = domino.createDocument('<body><form>' + 
+    '<input name="input"/>'+
+    '<button name="button"></button>'+
+    '<fieldset name="fieldset"></fieldset>'+
+    '<object name="object"></object>'+
+    '<output name="output"></output>'+
+    '<select name="select"></select>'+
+    '<textarea name="textarea"></textarea>'+
+  '</form></body>');
   var form = document.querySelector('form');
-  form.elements.length.should.equal(7);
+  var elements = form.elements;
+  elements.length.should.equal(7);
+  for (var i = 0; i < elements.length; i++) {
+    var element = elements[i];
+    element.should.equal(form.children[i]);
+    elements.item(i).should.equal(element);
+    elements[element.tagName.toLowerCase()].should.equal(element);
+    elements.namedItem(element.name).should.equal(element);
+  }
+
 };
