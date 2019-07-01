@@ -1416,7 +1416,7 @@ exports.formElements = function(){
     var element = elements[i];
     element.should.equal(form.children[i]);
     elements.item(i).should.equal(element);
-    elements[element.tagName.toLowerCase()].should.equal(element);
+    elements[element.name].should.equal(element);
     elements.namedItem(element.name).should.equal(element);
   }
 
